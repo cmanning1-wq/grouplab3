@@ -29,6 +29,18 @@ try:
             'region': region_name
         })
 
+    # Write portion
+    # Loop to retrieve both region name and country list 
+    for region_name, country_list in countries.items():
+
+        # Creates a new CSV file for each region
+        with open(f"{region_name}.CSV", "w", newline="") as file:
+            writer = csv.DictWriter(file, fieldnames=["name", "region"])
+
+            # Write colummn headers
+            writer.writeheader()
+            writer.writerows(country_list)
+
 # Checks for any outstanding errors
 except FileNotFoundError:
     print("File not found")
