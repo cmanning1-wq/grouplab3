@@ -1,0 +1,41 @@
+# CIS-117 Lab3
+# Splits the CSV file of world countries by respective continent.
+# Chance Manning
+# Group 14, Chance Manning, Kelly Le
+# Chance did the reading of the CSV file, and Kelly did the writing section of the file.
+
+import csv
+
+countries = {}
+
+try:
+    # Opens the CSV file and reads it
+    with open("country_full.csv") as file:
+        file_reader = csv.DictReader(file)
+
+    # Split the file into the required columns 
+    for line in file_reader:
+        country_name = line["name"]
+        region_name = line["region"]
+
+        region_name = region_name.strip()
+
+        if region_name not in countries:
+            countries[region_name] = []
+    
+    # Sorts through each country
+        countries[region_name].append({
+            'name': country_name.strip(),
+            'region': region_name
+        })
+
+# Checks for any outstanding errors
+except FileNotFoundError:
+    print("File not found")
+except IOError:
+    print("An I/O error occured")
+except PermissionError:
+    print("You don't have permission to access this file.")
+
+
+
